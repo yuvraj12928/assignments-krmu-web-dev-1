@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- COMBINED CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 3rem;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #007bff;
+        }
+
+        /* HERO */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            padding: 4rem 3rem;
+            align-items: center;
+        }
+
+        .hero-text h2 {
+            font-size: 2.5rem;
+        }
+
+        .highlight {
+            color: #007bff;
+        }
+
+        .animated-role {
+            font-size: 1.5rem;
+            animation: colorChange 3s infinite alternate;
+        }
+
+        @keyframes colorChange {
+            0% { color: #007bff; }
+            100% { color: #ff3d7f; }
+        }
+
+        .hero-img img {
+            width: 260px;
+            border-radius: 50%;
+        }
+
+        .btn {
+            padding: 0.7rem 1.4rem;
+            margin-top: 1rem;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: #005ad1;
+        }
+
+        /* SECTION HEADINGS */
+        .heading {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        /* ABOUT */
+        .about {
+            padding: 3rem;
+            text-align: center;
+        }
+
+        /* GRID SECTIONS */
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            padding: 0 3rem;
+        }
+
+        .card, .project-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .card:hover, .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* CONTACT */
+        .contact form {
+            max-width: 500px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 3rem;
+        }
+
+        input, textarea {
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid #bbb;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #ddd;
+            margin-top: 2rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-img {
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1 class="logo">MyPortfolio</h1>
+        <nav>
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero">
+        <div class="hero-text">
+            <h2>Hello, I’m <span class="highlight">Yuvraj</span></h2>
+            <h3 class="animated-role">Full Stack Developer</h3>
+            <p>I build modern and responsive web experiences using clean and efficient code.</p>
+            <button class="btn">Hire Me</button>
+        </div>
+
+        <div class="hero-img">
+          <div>  <img src="https://img.sanishtech.com/u/cb2019c4d0e1cf65df460dcbb6fef25f.jpg" alt="Profile">
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+        <h2 class="heading">About Me</h2>
+        <p>I am a passionate Web Developer skilled in front-end and back-end development. I enjoy creating responsive and beautiful websites using modern technologies.</p>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="skills">
+        <h2 class="heading">Skills</h2>
+        <div class="grid">
+            <div class="card">HTML</div>
+            <div class="card">CSS</div>
+            <div class="card">JavaScript</div>
+            <div class="card">Python</div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="projects">
+        <h2 class="heading">Projects</h2>
+        <div class="grid">
+            <div class="project-card">
+                <h3>Portfolio Website</h3>
+                <p>A responsive portfolio built using HTML, CSS Grid, Flexbox and animations.</p>
+            </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+        <h2 class="heading">Contact Me</h2>
+        <form>
+            <input type="text" placeholder="Enter your name" required>
+            <input type="email" placeholder="Enter your email" required>
+            <textarea placeholder="Your message" rows="5"></textarea>
+            <button class="btn">Send Message</button>
+        </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>©️ 2025 Yuvraj  | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>

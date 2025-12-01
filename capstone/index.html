@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Acme — Responsive Web Interface Demo</title>
+  <meta name="description" content="Responsive, semantic HTML5 & CSS3 demo — navigation, hero, cards, grid, forms, and footer." />
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* =====================================================
+       Responsive Web Interface — single-file demo
+       Semantic structure, accessible patterns, visual design
+       ===================================================== */
+
+    :root{
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: #4f46e5; /* indigo */
+      --accent-2: #06b6d4; /* teal */
+      --glass: rgba(255,255,255,0.04);
+      --radius: 12px;
+      --max-width: 1100px;
+      --flow: 1.25rem;
+      --container-padding: 1.25rem;
+      color-scheme: dark;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
+      background:linear-gradient(180deg,var(--bg),#071129 120%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    /* Utility container centered */
+    .wrap{max-width:var(--max-width);margin:0 auto;padding:0 1.25rem}
+
+    header.site-header{
+      position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(3,7,18,0.6), rgba(3,7,18,0.25));backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(255,255,255,0.03);
+    }
+    .site-top{display:flex;align-items:center;justify-content:space-between;padding:0.85rem 0}
+
+    /* Brand */
+    .brand{display:flex;gap:.6rem;align-items:center}
+    .brand .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-weight:800;color:white}
+    .brand h1{font-size:1rem;margin:0}
+    .brand p{font-size:0.7rem;margin:0;color:var(--muted)}
+
+    /* Nav */
+    nav.primary{display:flex;gap:1rem;align-items:center}
+    nav.primary a{color:inherit;text-decoration:none;padding:.45rem .6rem;border-radius:8px;font-weight:600;font-size:0.95rem}
+    nav.primary a:hover, nav.primary a:focus{background:rgba(255,255,255,0.03);outline:none}
+
+    .cta{padding:.5rem .9rem;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 6px 20px rgba(79,70,229,0.12);font-weight:700}
+
+    /* Mobile nav */
+    .hamburger{display:none;background:transparent;border:0;color:inherit;font-size:1.2rem}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:center;padding:2.25rem 0}
+    .hero .lead{max-width:60ch}
+    .eyebrow{display:inline-block;padding:.25rem .6rem;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted);font-weight:700;font-size:.78rem;margin-bottom:.75rem}
+    h2{font-size:2rem;margin:.25rem 0 0.5rem;line-height:1.02}
+    p.lead{color:var(--muted);font-size:1rem}
+
+    .hero-cta{display:flex;gap:.75rem;margin-top:1rem}
+
+    /* Card preview */
+    .preview-card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:1.25rem;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
+    .card-title{font-weight:700}
+    .stat-grid{display:flex;gap:.75rem;margin-top:.75rem}
+    .stat{flex:1;padding:.65rem;border-radius:10px;background:rgba(255,255,255,0.02);text-align:center}
+    .stat strong{display:block;font-size:1.1rem}
+    .stat span{color:var(--muted);font-size:.85rem}
+
+    /* Features */
+    section.features{padding:2rem 0}
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .feature{background:var(--glass);padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .feature h3{margin:.25rem 0}
+    .feature p{color:var(--muted);font-size:.95rem}
+
+    /* Testimonials + CTAs */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center}
+    .testimonials{padding:1rem;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px}
+
+    /* Cards gallery */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding:1rem 0}
+    .card{background:var(--card);padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+
+    /* Contact */
+    .contact{padding:1rem;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px}
+    .form-row{display:flex;gap:.75rem}
+    .form-row .field{flex:1}
+    label{display:block;font-size:.85rem;margin-bottom:.3rem;color:var(--muted)}
+    input[type=text],input[type=email],textarea,select{width:100%;padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    textarea{min-height:110px}
+    button.primary{background:var(--accent);border:0;padding:.65rem .9rem;border-radius:10px;color:white;font-weight:700}
+
+    /* Footer */
+    footer.site-footer{padding:2rem 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+    .footer-grid{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center}
+    .social{display:flex;gap:.5rem}
+    .small{font-size:.85rem}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr;}
+      .preview-card{order:2}
+      .features-grid{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .two-col{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      .site-top{gap:.5rem}
+      nav.primary{display:none}
+      .hamburger{display:inline-flex}
+      .hero{padding:1.25rem 0}
+      .features-grid{grid-template-columns:1fr}
+      .gallery{grid-template-columns:1fr}
+      .brand h1{font-size:.95rem}
+      h2{font-size:1.5rem}
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap site-top">
+      <div class="brand">
+        <div class="logo" aria-hidden>AC</div>
+        <div>
+          <h1>Acme</h1>
+          <p class="muted">Design • Product • Dev</p>
+        </div>
+      </div>
+
+      <nav class="primary" role="navigation" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#products">Products</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact" class="cta">Contact</a>
+      </nav>
+
+      <button class="hamburger" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu">☰</button>
+    </div>
+
+    <!-- Mobile menu (hidden by default) -->
+    <div id="mobile-menu" hidden>
+      <div class="wrap" style="padding-bottom:0.75rem;">
+        <a href="#features">Features</a>
+        <a href="#products">Products</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact" class="cta" style="display:inline-block;margin-top:.5rem">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero" aria-labelledby="home-heading">
+      <div>
+        <span class="eyebrow">New release</span>
+        <h2 id="home-heading">Beautiful, performant interfaces — built with semantic HTML & CSS</h2>
+        <p class="lead">This single-file demo shows a realistic page layout using modern HTML5 structure, responsive CSS3 techniques, accessible patterns, and a clean visual system powered by CSS variables. Use it as a starting point for prototypes and projects.</p>
+
+        <div class="hero-cta">
+          <a class="cta" href="#products">Get the UI kit</a>
+          <a href="#features" class="muted" style="padding:.5rem .9rem;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;font-weight:700">See features</a>
+        </div>
+
+        <div style="margin-top:1.25rem;display:flex;gap:.75rem;align-items:center">
+          <span class="muted">Trusted by</span>
+          <div style="display:flex;gap:.5rem;align-items:center;margin-left:.6rem">
+            <div style="width:44px;height:28px;background:linear-gradient(90deg,#fff1,#fff1);border-radius:6px;opacity:.08"></div>
+            <div style="width:44px;height:28px;background:linear-gradient(90deg,#fff1,#fff1);border-radius:6px;opacity:.06"></div>
+            <div style="width:44px;height:28px;background:linear-gradient(90deg,#fff1,#fff1);border-radius:6px;opacity:.04"></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="preview-card" aria-label="Preview card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="card-title">Acme Analytics</div>
+            <div class="muted" style="font-size:.9rem">Overview • Live</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:800;font-size:1.25rem">$18.5k</div>
+            <div class="muted" style="font-size:.85rem">Monthly</div>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat"><strong>1.2k</strong><span>Active</span></div>
+          <div class="stat"><strong>3.4%</strong><span>Conversion</span></div>
+          <div class="stat"><strong>98%</strong><span>Uptime</span></div>
+        </div>
+
+        <div style="margin-top:1rem;display:flex;gap:.5rem;align-items:center">
+          <button class="primary">Upgrade plan</button>
+          <a href="#" class="muted" style="padding:.5rem .8rem;border-radius:8px">View reports →</a>
+        </div>
+      </aside>
+    </section>
+
+    <section id="features" class="wrap features" aria-labelledby="features-heading">
+      <h3 id="features-heading" class="visually-hidden">Features</h3>
+      <div class="features-grid">
+        <article class="feature">
+          <h3>Semantic & accessible</h3>
+          <p>Built with real HTML5 landmarks (header, nav, main, section, footer) so assistive tech and crawlers can understand the page.</p>
+        </article>
+        <article class="feature">
+          <h3>Responsive layout</h3>
+          <p>Grid and flex patterns adapt from desktop to mobile. Scales fluidly using CSS variables and breakpoints.</p>
+        </article>
+        <article class="feature">
+          <h3>Design system ready</h3>
+          <p>Colors, spacing, and radii are in variables — easy to adapt into a component library or theme switcher.</p>
+        </article>
+      </div>
+
+      <div style="margin-top:1rem;" class="two-col">
+        <div class="testimonials">
+          <h4>What teams say</h4>
+          <blockquote style="margin:0;font-style:italic;color:var(--muted)">"We shipped our first responsive prototype from this template in one day — clean, accessible, and reliable."</blockquote>
+          <p style="margin-top:.6rem" class="muted">— Product design, Nova Labs</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:.75rem;justify-content:center">
+          <div style="display:flex;gap:.5rem;align-items:center">
+            <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2))"></div>
+            <div>
+              <div style="font-weight:700">Start building</div>
+              <div class="muted">Components, pages, and patterns included</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:.5rem">
+            <button class="primary">Download kit</button>
+            <a href="#" class="muted" style="padding:.5rem .8rem;border-radius:8px">Docs</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="wrap">
+      <h3 style="margin:0 0 .75rem">Products</h3>
+      <div class="gallery">
+        <article class="card">
+          <h4>Dashboard</h4>
+          <p class="muted">Real-time data, alerts, and insights.</p>
+        </article>
+        <article class="card">
+          <h4>Marketing</h4>
+          <p class="muted">Campaigns, A/B testing, and reporting.</p>
+        </article>
+        <article class="card">
+          <h4>Support</h4>
+          <p class="muted">Ticketing, SLAs, and knowledge base.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="wrap" style="padding-top:1.5rem;padding-bottom:2rem">
+      <h3 style="margin-bottom:.6rem">Contact</h3>
+      <div class="contact">
+        <form class="contact-form" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" type="text" placeholder="Your name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+
+          <div style="margin-top:.75rem">
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="How can we help?"></textarea>
+          </div>
+
+          <div style="margin-top:.75rem;display:flex;justify-content:space-between;align-items:center">
+            <div class="small muted">We usually reply within 1–2 business days.</div>
+            <div>
+              <button class="primary" type="submit">Send message</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <div style="display:flex;gap:.6rem;align-items:center"><div class="logo" style="width:36px;height:36px;font-size:.85rem">AC</div><div><strong>Acme</strong><div class="muted small">© <span id="year"></span> Acme, Inc.</div></div></div>
+        <p class="muted small" style="margin-top:.6rem">Made with semantic HTML5, modern CSS, and a pinch of ✨</p>
+      </div>
+
+      <div style="display:flex;gap:1rem;align-items:center">
+        <nav aria-label="Footer">
+          <a href="#">Terms</a> • <a href="#">Privacy</a>
+        </nav>
+        <div class="social muted small">Twitter • GitHub • Docs</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // small interactive helpers: mobile menu and year
+    (function(){
+      const btn = document.querySelector('.hamburger');
+      const menu = document.getElementById('mobile-menu');
+      btn?.addEventListener('click', ()=>{
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        if(open){ menu.hidden = true; btn.textContent = '☰'; }
+        else { menu.hidden = false; btn.textContent = '✕'; }
+      });
+
+      // simple form handler (no network) to show accessible notice
+      document.querySelector('.contact-form')?.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const name = document.getElementById('name').value || 'Friend';
+        alert('Thanks, ' + name + '! Your message has been queued (demo).');
+        e.target.reset();
+      });
+
+      // footer year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
